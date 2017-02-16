@@ -57,17 +57,13 @@ public class NeuralArt {
         System.loadLibrary("THNN");
         //System.loadLibrary("THCUNN");
 
-        ArtUtil.log("torchandroid loading... ");
-        //System.loadLibrary("torchandroid");
-
         System.loadLibrary("image");
-
 
         System.loadLibrary("neuralart");
 
         String dir = context.getApplicationInfo().nativeLibraryDir;
         AssetManager manager = context.getAssets();
-        initTorchPredictor(manager, dir);
+        nativeInitTorchPredictor(manager, dir);
     }
 
     public void styleImage(Bitmap bitmap) {
@@ -76,10 +72,10 @@ public class NeuralArt {
         ByteBuffer byteBuffer = ByteBuffer.allocate(scaled.getByteCount());
         scaled.copyPixelsToBuffer(byteBuffer);
         ArtUtil.log("begin styling....");
-        styleImage(byteBuffer.array());
+        nativeStyleImage(byteBuffer.array());
     }
 
-    native private void initTorchPredictor(AssetManager manager, String libLocation);
+    native private void nativeInitTorchPredictor(AssetManager manager, String libLocation);
 
-    native private void styleImage(byte[] imageBytes);
+    native private void nativeStyleImage(byte[] imageBytes);
 }

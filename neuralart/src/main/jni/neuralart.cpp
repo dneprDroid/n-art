@@ -73,7 +73,7 @@ static void onImageStyled(lua_State *L) {
 */
 
 JNIEXPORT void  JNICALL
-Java_art_neural_ovechko_neuralart_NeuralArt_styleImage(JNIEnv *env, jobject thiz,
+Java_art_neural_ovechko_neuralart_NeuralArt_nativeStyleImage(JNIEnv *env, jobject thiz,
                                                        jbyteArray bitmapRGBData) {
 
     luaFree();
@@ -116,7 +116,7 @@ Java_art_neural_ovechko_neuralart_NeuralArt_styleImage(JNIEnv *env, jobject thiz
 }
 
 JNIEXPORT void  JNICALL
-Java_art_neural_ovechko_neuralart_NeuralArt_initTorchPredictor(JNIEnv *env, jobject thiz,
+Java_art_neural_ovechko_neuralart_NeuralArt_nativeInitTorchPredictor(JNIEnv *env, jobject thiz,
                                                                jobject assetManager,
                                                                jstring _nativeLibraryDir) {
     //jint rs = env->GetJavaVM(&jvm);
