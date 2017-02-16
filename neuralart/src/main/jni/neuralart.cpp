@@ -24,6 +24,9 @@ extern "C" {
 #define Log(string)                 __android_log_print(ANDROID_LOG_INFO, "NeuralArt", string)
 #define throwException(env, message)        env->ThrowNew(env->FindClass("art/neural/ovechko/neuralart/NArtException"), message)
 
+#define KBYTES_CLEAN_UP 10000
+#define LUAT_STACK_INDEX_FLOAT_TENSORS 4
+
 lua_State *L; // Lua state
 
 
@@ -72,6 +75,9 @@ static void onImageStyled(lua_State *L) {
 JNIEXPORT void  JNICALL
 Java_art_neural_ovechko_neuralart_NeuralArt_styleImage(JNIEnv *env, jobject thiz,
                                                        jbyteArray bitmapRGBData) {
+
+    luaFree();
+
     jbyte *inputData; // Initialize tensor to store java byte data from bitmap.
     inputData = (env)->GetByteArrayElements(bitmapRGBData,
                                             0); // Get pointer to java byte array region
@@ -137,5 +143,22 @@ Java_art_neural_ovechko_neuralart_NeuralArt_initTorchPredictor(JNIEnv *env, jobj
         }
     }
     lua_getglobal(L, "initPredictor"); // call lua function
+}
+
+JNIEXPORT void  JNICALL
+Java_art_neural_ovechko_neuralart_NeuralArt_nativeFree(JNIEnv *env, jobject thiz) {
+    Log("Lua gc running....");
+    luaFree();
+    free(L);
+}
+
+void luaFree() {
+    int garbage_size_kbytes = lua_gc(L, LUA_GCCOUNT, LUAT_STACK_INDEX_FLOAT_TENSORS);
+
+      if (garbage_size_kbytes >= KBYTES_CLEAN_UP)
+      {
+        Log("LUA -> Cleaning Up Garbage");
+        lua_gc(L, LUA_GCCOLLECT, LUAT_STACK_INDEX_FLOAT_TENSORS);
+      }
 }
 }
