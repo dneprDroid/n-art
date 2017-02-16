@@ -22,7 +22,7 @@ extern "C" {
 #define arraySize(_array) (sizeof(_array) / sizeof(_array[0]))
 #define Log(string, args...)        __android_log_print(ANDROID_LOG_INFO, "NeuralArt", string, args)
 #define Log(string)                 __android_log_print(ANDROID_LOG_INFO, "NeuralArt", string)
-#define throwException(env, message)        env->ThrowNew(env->FindClass("java/lang/Exception"), message)
+#define throwException(env, message)        env->ThrowNew(env->FindClass("art/neural/ovechko/neuralart/NArtException"), message)
 
 lua_State *L; // Lua state
 
@@ -74,7 +74,7 @@ Java_art_neural_ovechko_neuralart_NeuralArt_styleImage(JNIEnv *env, jobject thiz
                                                        jbyteArray bitmapRGBData) {
     jbyte *inputData; // Initialize tensor to store java byte data from bitmap.
     inputData = (env)->GetByteArrayElements(bitmapRGBData,
-                                            0);//Get pointer to java byte array region
+                                            0); // Get pointer to java byte array region
     int result = -1;
     int size = IMG_W * IMG_H;
     THFloatTensor *testTensor = THFloatTensor_newWithSize1d(
@@ -94,9 +94,8 @@ Java_art_neural_ovechko_neuralart_NeuralArt_styleImage(JNIEnv *env, jobject thiz
     //free(testTensor);
 
     if (lua_pcall(L, 1, 1, 0) != 0) {
-        //Call function. Print error if call not successful
         throwException(env, "Error calling lua function styleImage");
-        //Log("Error running function: %s", lua_tostring(L, -1));
+        Log(lua_tostring(L, -1));
     } else {
         THFloatTensor *result = (THFloatTensor *) luaT_toudata(L, 1, FloatTensor);
         assert(result != NULL);
@@ -107,7 +106,7 @@ Java_art_neural_ovechko_neuralart_NeuralArt_styleImage(JNIEnv *env, jobject thiz
         Log("casting float tensor to jfloat is succeeded...");
     }
     env->ReleaseByteArrayElements(bitmapRGBData, inputData,
-                                  0); //Destroy pointer to location in C. Only need java now
+                                  0); // Destroy pointer to location in C. Only need java now
 }
 
 JNIEXPORT void  JNICALL
