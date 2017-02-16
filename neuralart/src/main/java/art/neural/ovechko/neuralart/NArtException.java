@@ -1,7 +1,9 @@
 package art.neural.ovechko.neuralart;
 
 
-public class NArtException extends Exception {
+import java.util.IllegalFormatException;
+
+public class NArtException extends RuntimeException {
     public NArtException() {
     }
 

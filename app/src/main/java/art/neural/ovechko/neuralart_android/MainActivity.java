@@ -12,16 +12,18 @@ import android.view.View;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
+import art.neural.ovechko.neuralart.ArtUtil;
+import art.neural.ovechko.neuralart.NeuralArt;
+
 public class MainActivity extends AppCompatActivity {
 
     public static final int PICKER_CODE = 100;
+    private Uri imageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //NeuralArt.init(this);
 
         findViewById(R.id.btnSelect).setOnClickListener(new View.OnClickListener() {
 
@@ -32,24 +34,33 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(photoPickerIntent, PICKER_CODE);
             }
         });
+
+
+        findViewById(R.id.btnStyle).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    InputStream imageStream = getContentResolver().openInputStream(imageUri); // content://media/external/images/media/18306
+                    Bitmap bitmap = BitmapFactory.decodeStream(imageStream);
+
+                    NeuralArt.styleImage(MainActivity.this, bitmap);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        ArtUtil.log("onActivityResult....");
         super.onActivityResult(requestCode, resultCode, data);
 
         boolean resultOk = resultCode == RESULT_OK && requestCode == PICKER_CODE && data != null;
         if (resultOk) {
-            try {
-                Uri imageUri = data.getData();
-                InputStream imageStream = getContentResolver().openInputStream(imageUri);
-                Bitmap bitmap = BitmapFactory.decodeStream(imageStream);
-
-                NeuralArt.with(this).styleImage(bitmap);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+            imageUri = data.getData();
+            Log.v("", "image uri: " + imageUri.toString());
         } else Log.e("", "result isn't ok....");
     }
 }

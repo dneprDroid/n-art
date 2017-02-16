@@ -26,9 +26,22 @@ extern "C" {
 
 #define KBYTES_CLEAN_UP 10000
 #define LUAT_STACK_INDEX_FLOAT_TENSORS 4
+#define GC_LUA_SIZE                lua_gc(L, LUA_GCCOUNT, LUAT_STACK_INDEX_FLOAT_TENSORS)
+#define isTimeToCleanLuaGC()       GC_LUA_SIZE >= KBYTES_CLEAN_UP
 
 lua_State *L; // Lua state
 
+
+void luaFree() {
+
+      if (isTimeToCleanLuaGC())
+      {
+        Log("LUA -> Cleaning Up Garbage");
+        lua_gc(L, LUA_GCCOLLECT, LUAT_STACK_INDEX_FLOAT_TENSORS);
+      } else {
+        Log("Lua GC size: %s", GC_LUA_SIZE);
+      }
+}
 
 int *styleImage(int *pixels, int w, int h) {
     float *imageTensor = new float[w * h * 3 * sizeof(float)];
@@ -73,9 +86,9 @@ static void onImageStyled(lua_State *L) {
 */
 
 JNIEXPORT void  JNICALL
-Java_art_neural_ovechko_neuralart_NeuralArt_nativeStyleImage(JNIEnv *env, jobject thiz,
+Java_art_neural_ovechko_neuralart_TorchPredictor_nativeStyleImage(JNIEnv *env, jobject thiz,
                                                        jbyteArray bitmapRGBData) {
-
+    Log("nativeStyleImage....");
     luaFree();
 
     jbyte *inputData; // Initialize tensor to store java byte data from bitmap.
@@ -97,12 +110,14 @@ Java_art_neural_ovechko_neuralart_NeuralArt_nativeStyleImage(JNIEnv *env, jobjec
     lua_getglobal(L, "styleImage");
     Log("luaT pushudata ...");
     luaT_pushudata(L, testTensor, FloatTensor);
-    //free(testTensor);
+    free(testTensor);
 
     if (lua_pcall(L, 1, 1, 0) != 0) {
         throwException(env, "Error calling lua function styleImage");
         Log(lua_tostring(L, -1));
     } else {
+        Log("begin tensor converting...");
+
         THFloatTensor *result = (THFloatTensor *) luaT_toudata(L, 1, FloatTensor);
         assert(result != NULL);
         Log("received float tensor...");
@@ -116,7 +131,7 @@ Java_art_neural_ovechko_neuralart_NeuralArt_nativeStyleImage(JNIEnv *env, jobjec
 }
 
 JNIEXPORT void  JNICALL
-Java_art_neural_ovechko_neuralart_NeuralArt_nativeInitTorchPredictor(JNIEnv *env, jobject thiz,
+Java_art_neural_ovechko_neuralart_TorchPredictor_nativeInitTorchPredictor(JNIEnv *env, jobject thiz,
                                                                jobject assetManager,
                                                                jstring _nativeLibraryDir) {
     //jint rs = env->GetJavaVM(&jvm);
@@ -143,6 +158,7 @@ Java_art_neural_ovechko_neuralart_NeuralArt_nativeInitTorchPredictor(JNIEnv *env
         }
     }
     lua_getglobal(L, "initPredictor"); // call lua function
+    Log("inited predicior...");
 }
 
 JNIEXPORT void  JNICALL
@@ -150,15 +166,5 @@ Java_art_neural_ovechko_neuralart_NeuralArt_nativeFree(JNIEnv *env, jobject thiz
     Log("Lua gc running....");
     luaFree();
     free(L);
-}
-
-void luaFree() {
-    int garbage_size_kbytes = lua_gc(L, LUA_GCCOUNT, LUAT_STACK_INDEX_FLOAT_TENSORS);
-
-      if (garbage_size_kbytes >= KBYTES_CLEAN_UP)
-      {
-        Log("LUA -> Cleaning Up Garbage");
-        lua_gc(L, LUA_GCCOLLECT, LUAT_STACK_INDEX_FLOAT_TENSORS);
-      }
 }
 }
