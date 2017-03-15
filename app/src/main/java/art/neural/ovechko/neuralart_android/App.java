@@ -21,4 +21,11 @@ public class App extends Application {
 
         super.onLowMemory();
     }
+
+    @Override
+    public void onTrimMemory(int level) {
+        ArtUtil.log("onTrimMemory  ....  "+level);
+
+        super.onTrimMemory(level);
+    }
 }

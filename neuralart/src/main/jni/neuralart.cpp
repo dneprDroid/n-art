@@ -20,7 +20,8 @@ extern "C" {
 #define MEAN_B 123.68f
 #define FloatTensor "torch.FloatTensor"
 #define arraySize(_array) (sizeof(_array) / sizeof(_array[0]))
-#define Log(string, args...)        __android_log_print(ANDROID_LOG_INFO, "NeuralArt", string, args)
+#define Logw(string, x...)        __android_log_print(ANDROID_LOG_INFO, "NeuralArt", string, x)
+
 #define Log(string)                 __android_log_print(ANDROID_LOG_INFO, "NeuralArt", string)
 #define throwException(env, message)        env->ThrowNew(env->FindClass("art/neural/ovechko/neuralart/NArtException"), message)
 
@@ -29,7 +30,8 @@ extern "C" {
 #define GC_LUA_SIZE                lua_gc(L, LUA_GCCOUNT, LUAT_STACK_INDEX_FLOAT_TENSORS)
 #define isTimeToCleanLuaGC()       GC_LUA_SIZE >= KBYTES_CLEAN_UP
 
-lua_State *L; // Lua state
+
+static lua_State *L; // Lua state
 
 
 void luaFree() {
@@ -39,27 +41,21 @@ void luaFree() {
         Log("LUA -> Cleaning Up Garbage");
         lua_gc(L, LUA_GCCOLLECT, LUAT_STACK_INDEX_FLOAT_TENSORS);
       } else {
-        Log("Lua GC size: %s", GC_LUA_SIZE);
+        Logw("Lua GC size: %d", GC_LUA_SIZE);
       }
 }
-
-int *styleImage(int *pixels, int w, int h) {
-    float *imageTensor = new float[w * h * 3 * sizeof(float)];
-    int img_lenght = w * h * 4;
-    for (int i = 0; i < img_lenght; i += 4) {
-        int j = i / 4;
-        imageTensor[0 * IMG_W * IMG_H + j] =
-                (float) (((int) (pixels[i + 0])) & 0xFF) - MEAN_R; // red
-        imageTensor[1 * IMG_W * IMG_H + j] =
-                (float) (((int) (pixels[i + 1])) & 0xFF) - MEAN_G; // green
-        imageTensor[2 * IMG_W * IMG_H + j] =
-                (float) (((int) (pixels[i + 2])) & 0xFF) - MEAN_B; // blue
-    }
-    free(pixels);
-
-    //luaT_pushudata(L, testTensor, FloatTensor);
-}
 /*
+bool isMainThread(JNIEnv *env) {
+    jclass class1 = env->FindClass("art/neural/ovechko/neuralart/ArtUtil");
+
+
+    jmethodID mid = env->GetStaticMethodID(class1, "isMainThread", "()B");
+
+    jboolean isMainThread = env->CallStaticBooleanMethod(class1, mid);
+    return (bool)(isMainThread == JNI_TRUE);
+}
+
+
 //called from Lua
 static void onImageStyled(lua_State *L) {
     JNIEnv *env;
@@ -88,6 +84,7 @@ static void onImageStyled(lua_State *L) {
 JNIEXPORT void  JNICALL
 Java_art_neural_ovechko_neuralart_TorchPredictor_nativeStyleImage(JNIEnv *env, jobject thiz,
                                                        jbyteArray bitmapRGBData) {
+
     Log("nativeStyleImage....");
     luaFree();
 
@@ -96,21 +93,26 @@ Java_art_neural_ovechko_neuralart_TorchPredictor_nativeStyleImage(JNIEnv *env, j
                                             0); // Get pointer to java byte array region
     int result = -1;
     int size = IMG_W * IMG_H;
-    THFloatTensor *testTensor = THFloatTensor_newWithSize1d(
-            3 * size); //Initialize 1D tensor with size * 3 (R,G,B).
-    jfloat *testTensorData = THFloatTensor_data(testTensor);
+    THFloatTensor *testTensor = THFloatTensor_newWithSize1d(3 * size); //Initialize 1D tensor with size * 3 (R,G,B).
+    //jfloat *testTensorData = THFloatTensor_data(testTensor);
     Log("testTensorData created...");
 
     for (int i = 0; i < size; i++) {
-        testTensorData[size * 0 + i] = (inputData[i * 4 + 0] & 0xFF) - MEAN_R; // Red
-        testTensorData[size * 1 + i] = (inputData[i * 4 + 1] & 0xFF) - MEAN_G; // Green
-        testTensorData[size * 2 + i] = (inputData[i * 4 + 2] & 0xFF) - MEAN_B; // Blue
+        THTensor_fastSet1d(testTensor,  size * 0 + i,    (inputData[i * 4 + 0] & 0xFF) - MEAN_R); // Red
+        THTensor_fastSet1d(testTensor,  size * 1 + i,    (inputData[i * 4 + 1] & 0xFF) - MEAN_G); // Green
+        THTensor_fastSet1d(testTensor,  size * 2 + i,    (inputData[i * 4 + 2] & 0xFF) - MEAN_B); // Blue
     }
     Log("image to tensor converted...");
+    free(inputData);
+    Log("cleaned jbyte array ");
+
+    //Logw("checking thred type: %b", isMainThread(env));
     lua_getglobal(L, "styleImage");
     Log("luaT pushudata ...");
+
     luaT_pushudata(L, testTensor, FloatTensor);
-    free(testTensor);
+
+    Log("luaT push data ended ...");
 
     if (lua_pcall(L, 1, 1, 0) != 0) {
         throwException(env, "Error calling lua function styleImage");

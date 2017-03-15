@@ -18,13 +18,13 @@ directory of images.
 
 local vgg_mean = { 103.939, 116.779, 123.68 }
 
-local image_size = 768
-local m_filter = 3
+--local image_size = 768
+--local m_filter = 3
 
 --- **** Torch Predictor **** ----
-        local model -- torch pre-trained model
+        --local model -- torch pre-trained model
 
-        local function initPredictor()
+        function initPredictor()
             print('started initing predictor')
             -- model = torch.load('candy.t7').model
             -- print(model)
@@ -33,7 +33,7 @@ local m_filter = 3
             print('ended initing predictor')
         end
 
-        local function styleImage(img_pre)
+        function styleImage(img_pre)
             print('started image forwarding.......')
             -- local img_out = model:forward(img_pre)
             -- print('ended image forwarding')

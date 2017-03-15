@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
@@ -19,11 +20,15 @@ import java.util.Random;
 
 
 public final class ArtUtil {
+
+    public static boolean isMainThread() {
+        return Looper.myLooper() == Looper.getMainLooper();
+    }
     //Debug
     public static void saveBitmap(final Bitmap bitmap) {
         File myDir = new File("/sdcard/saved_images");
         myDir.mkdirs();
-        String fname = String.format("Image-%s.jpg", randomInt(1000));
+        String fname = String.format("Image-%s.jpg", randomInt(50));
         File file = new File(myDir, fname);
         if (file.exists()) file.delete();
         try {
@@ -38,6 +43,10 @@ public final class ArtUtil {
 
     public static void log(String s) {
         Log.d("NeuralArt", s);
+    }
+
+    public static void log(String s, Object... args) {
+        log(String.format(s, args));
     }
 
     @Nullable

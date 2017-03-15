@@ -1,5 +1,6 @@
 package art.neural.ovechko.neuralart;
 
+import android.app.IntentService;
 import android.app.Service;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -9,9 +10,13 @@ import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
 
-public class ArtService extends Service {
+public class ArtService extends IntentService {
     public static final String IMAGE_DATA = "IMAGE_DATA";
     private IBinder mBinder = new MyBinder();
+
+    public ArtService() {
+        super("ArtService");
+    }
 
 
     @Override
@@ -23,8 +28,6 @@ public class ArtService extends Service {
                 TorchPredictor.with(ArtService.this);
             }
         });
-
-
     }
 
     @Override
@@ -40,9 +43,11 @@ public class ArtService extends Service {
             ArtUtil.log("Bitmap is empty....");
             return;
         }
+        ArtUtil.log("image size: %s", imageData.length);
         runTask(new Runnable() {
             @Override
             public void run() {
+                ArtUtil.log("isMainThread: %s", ArtUtil.isMainThread());
                 TorchPredictor.with(ArtService.this).nativeStyleImage(imageData);
             }
         });
@@ -63,6 +68,11 @@ public class ArtService extends Service {
     }
 
     @Override
+    protected void onHandleIntent(Intent intent) {
+
+    }
+
+    @Override
     public void onRebind(Intent intent) {
         ArtUtil.log("in onRebind");
         super.onRebind(intent);
@@ -79,7 +89,7 @@ public class ArtService extends Service {
     }
 
     public class MyBinder extends Binder {
-        ArtService getService() {
+        public ArtService getService() {
             return ArtService.this;
         }
     }
