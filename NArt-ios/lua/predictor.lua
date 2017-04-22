@@ -1,0 +1,51 @@
+require 'torch'
+require 'nn'
+require 'image'
+
+--require 'nn.SpatialReflectionPadding'
+
+require 'ShaveImage'
+require 'TotalVariation'
+require 'InstanceNormalization'
+
+--require 'nn.SpatialBatchNormalization'
+--require 'nn.MulConstant'
+
+
+-- local utils = require 'fast_neural_style.utils'
+-- local preprocess = require 'fast_neural_style.preprocess'
+
+--[[
+Use a trained feedforward model to stylize either a single image or an entire
+directory of images.
+--]]
+
+
+
+local vgg_mean = { 103.939, 116.779, 123.68 }
+
+--local image_size = 768
+--local m_filter = 3
+
+--- **** Torch Predictor **** ----
+        local model -- torch pre-trained model
+
+        function initPredictor(path)
+            print('started initing predictor')
+
+            model = torch.load(path).model
+            print(model)
+            model:evaluate()
+            model:type('torch.FloatTensor')
+
+            print('ended initing predictor')
+        end
+
+        function styleImage(img_pre)
+            print('started image forwarding.......')
+            local img_out = model:forward(img_pre)
+            print('ended image forwarding')
+            return img_out
+        end
+
+--- **** Torch Predictor **** ----

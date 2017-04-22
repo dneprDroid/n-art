@@ -1,0 +1,610 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2240A6AA1E85CBBE005BC713 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2240A6A91E85CBBE005BC713 /* AppDelegate.swift */; };
+		2240A6AC1E85CBBE005BC713 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2240A6AB1E85CBBE005BC713 /* ViewController.swift */; };
+		2240A6AF1E85CBBE005BC713 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2240A6AD1E85CBBE005BC713 /* Main.storyboard */; };
+		2240A6B41E85CBBE005BC713 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2240A6B21E85CBBE005BC713 /* LaunchScreen.storyboard */; };
+		2240A6BF1E85CBBE005BC713 /* NArt_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2240A6BE1E85CBBE005BC713 /* NArt_iosTests.swift */; };
+		2240A6CA1E85CBBE005BC713 /* NArt_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2240A6C91E85CBBE005BC713 /* NArt_iosUITests.swift */; };
+		2240A6D91E85CC0B005BC713 /* NArt.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2240A6D81E85CC0B005BC713 /* NArt.mm */; };
+		2240A6E41E85CE6D005BC713 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2240A6E31E85CE6D005BC713 /* Accelerate.framework */; };
+		2240A6E81E85CEA9005BC713 /* Torch.m in Sources */ = {isa = PBXBuildFile; fileRef = 2240A6E71E85CEA9005BC713 /* Torch.m */; };
+		2242DB761EABEA910037389B /* Torch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2242DB751EABEA910037389B /* Torch.framework */; };
+		22699A401E8FAE0E0049841C /* candy.t7 in Resources */ = {isa = PBXBuildFile; fileRef = 22699A3E1E8FAE0E0049841C /* candy.t7 */; };
+		22699A421E8FAE160049841C /* predictor.lua in Resources */ = {isa = PBXBuildFile; fileRef = 22699A411E8FAE160049841C /* predictor.lua */; };
+		22699A441E8FB0550049841C /* photo1.png in Resources */ = {isa = PBXBuildFile; fileRef = 22699A431E8FB0550049841C /* photo1.png */; };
+		22699A461E8FB33F0049841C /* lua in Resources */ = {isa = PBXBuildFile; fileRef = 22699A451E8FB33F0049841C /* lua */; };
+		22FF25411E8FFF060073D400 /* ShaveImage.lua in Resources */ = {isa = PBXBuildFile; fileRef = 22FF25401E8FFF060073D400 /* ShaveImage.lua */; };
+		22FF25431E8FFF2E0073D400 /* TotalVariation.lua in Resources */ = {isa = PBXBuildFile; fileRef = 22FF25421E8FFF2E0073D400 /* TotalVariation.lua */; };
+		22FF25451E8FFF430073D400 /* InstanceNormalization.lua in Resources */ = {isa = PBXBuildFile; fileRef = 22FF25441E8FFF430073D400 /* InstanceNormalization.lua */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2240A6BB1E85CBBE005BC713 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2240A69E1E85CBBE005BC713 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2240A6A51E85CBBE005BC713;
+			remoteInfo = "NArt-ios";
+		};
+		2240A6C61E85CBBE005BC713 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2240A69E1E85CBBE005BC713 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2240A6A51E85CBBE005BC713;
+			remoteInfo = "NArt-ios";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2240A6A61E85CBBE005BC713 /* NArt-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NArt-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2240A6A91E85CBBE005BC713 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2240A6AB1E85CBBE005BC713 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		2240A6AE1E85CBBE005BC713 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2240A6B31E85CBBE005BC713 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2240A6B51E85CBBE005BC713 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2240A6BA1E85CBBE005BC713 /* NArt-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "NArt-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2240A6BE1E85CBBE005BC713 /* NArt_iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NArt_iosTests.swift; sourceTree = "<group>"; };
+		2240A6C01E85CBBE005BC713 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2240A6C51E85CBBE005BC713 /* NArt-iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "NArt-iosUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2240A6C91E85CBBE005BC713 /* NArt_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NArt_iosUITests.swift; sourceTree = "<group>"; };
+		2240A6CB1E85CBBE005BC713 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2240A6D71E85CC0B005BC713 /* NArt-ios-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NArt-ios-Bridging-Header.h"; sourceTree = "<group>"; };
+		2240A6D81E85CC0B005BC713 /* NArt.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NArt.mm; sourceTree = "<group>"; };
+		2240A6DA1E85CC32005BC713 /* NArt.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NArt.h; sourceTree = "<group>"; };
+		2240A6E31E85CE6D005BC713 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		2240A6E61E85CEA9005BC713 /* Torch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Torch.h; sourceTree = "<group>"; };
+		2240A6E71E85CEA9005BC713 /* Torch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Torch.m; sourceTree = "<group>"; };
+		2242DB751EABEA910037389B /* Torch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Torch.framework; sourceTree = "<group>"; };
+		22699A3E1E8FAE0E0049841C /* candy.t7 */ = {isa = PBXFileReference; lastKnownFileType = file; path = candy.t7; sourceTree = "<group>"; };
+		22699A411E8FAE160049841C /* predictor.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = predictor.lua; sourceTree = "<group>"; };
+		22699A431E8FB0550049841C /* photo1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo1.png; sourceTree = "<group>"; };
+		22699A451E8FB33F0049841C /* lua */ = {isa = PBXFileReference; lastKnownFileType = folder; path = lua; sourceTree = "<group>"; };
+		22FF25401E8FFF060073D400 /* ShaveImage.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ShaveImage.lua; sourceTree = "<group>"; };
+		22FF25421E8FFF2E0073D400 /* TotalVariation.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TotalVariation.lua; sourceTree = "<group>"; };
+		22FF25441E8FFF430073D400 /* InstanceNormalization.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = InstanceNormalization.lua; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2240A6A31E85CBBE005BC713 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2240A6E41E85CE6D005BC713 /* Accelerate.framework in Frameworks */,
+				2242DB761EABEA910037389B /* Torch.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2240A6B71E85CBBE005BC713 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2240A6C21E85CBBE005BC713 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2240A69D1E85CBBE005BC713 = {
+			isa = PBXGroup;
+			children = (
+				2240A6A81E85CBBE005BC713 /* NArt-ios */,
+				2240A6BD1E85CBBE005BC713 /* NArt-iosTests */,
+				2240A6C81E85CBBE005BC713 /* NArt-iosUITests */,
+				2240A6A71E85CBBE005BC713 /* Products */,
+				2240A6E31E85CE6D005BC713 /* Accelerate.framework */,
+			);
+			sourceTree = "<group>";
+		};
+		2240A6A71E85CBBE005BC713 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2240A6A61E85CBBE005BC713 /* NArt-ios.app */,
+				2240A6BA1E85CBBE005BC713 /* NArt-iosTests.xctest */,
+				2240A6C51E85CBBE005BC713 /* NArt-iosUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2240A6A81E85CBBE005BC713 /* NArt-ios */ = {
+			isa = PBXGroup;
+			children = (
+				22699A3C1E8FADCF0049841C /* lua */,
+				2240A6E91E85E1E7005BC713 /* n-art */,
+				2240A6EA1E85F1B9005BC713 /* res */,
+				2240A6E51E85CE86005BC713 /* torch */,
+				2240A6A91E85CBBE005BC713 /* AppDelegate.swift */,
+				2240A6B51E85CBBE005BC713 /* Info.plist */,
+				2240A6D71E85CC0B005BC713 /* NArt-ios-Bridging-Header.h */,
+				2240A6AB1E85CBBE005BC713 /* ViewController.swift */,
+			);
+			path = "NArt-ios";
+			sourceTree = "<group>";
+		};
+		2240A6BD1E85CBBE005BC713 /* NArt-iosTests */ = {
+			isa = PBXGroup;
+			children = (
+				2240A6C01E85CBBE005BC713 /* Info.plist */,
+				2240A6BE1E85CBBE005BC713 /* NArt_iosTests.swift */,
+			);
+			path = "NArt-iosTests";
+			sourceTree = "<group>";
+		};
+		2240A6C81E85CBBE005BC713 /* NArt-iosUITests */ = {
+			isa = PBXGroup;
+			children = (
+				2240A6CB1E85CBBE005BC713 /* Info.plist */,
+				2240A6C91E85CBBE005BC713 /* NArt_iosUITests.swift */,
+			);
+			path = "NArt-iosUITests";
+			sourceTree = "<group>";
+		};
+		2240A6E51E85CE86005BC713 /* torch */ = {
+			isa = PBXGroup;
+			children = (
+				2242DB751EABEA910037389B /* Torch.framework */,
+				2240A6E61E85CEA9005BC713 /* Torch.h */,
+				2240A6E71E85CEA9005BC713 /* Torch.m */,
+				22699A451E8FB33F0049841C /* lua */,
+			);
+			path = torch;
+			sourceTree = "<group>";
+		};
+		2240A6E91E85E1E7005BC713 /* n-art */ = {
+			isa = PBXGroup;
+			children = (
+				2240A6DA1E85CC32005BC713 /* NArt.h */,
+				2240A6D81E85CC0B005BC713 /* NArt.mm */,
+			);
+			path = "n-art";
+			sourceTree = "<group>";
+		};
+		2240A6EA1E85F1B9005BC713 /* res */ = {
+			isa = PBXGroup;
+			children = (
+				22699A431E8FB0550049841C /* photo1.png */,
+				2240A6B21E85CBBE005BC713 /* LaunchScreen.storyboard */,
+				2240A6AD1E85CBBE005BC713 /* Main.storyboard */,
+			);
+			path = res;
+			sourceTree = "<group>";
+		};
+		22699A3C1E8FADCF0049841C /* lua */ = {
+			isa = PBXGroup;
+			children = (
+				22699A3E1E8FAE0E0049841C /* candy.t7 */,
+				22699A411E8FAE160049841C /* predictor.lua */,
+				22FF25441E8FFF430073D400 /* InstanceNormalization.lua */,
+				22FF25421E8FFF2E0073D400 /* TotalVariation.lua */,
+				22FF25401E8FFF060073D400 /* ShaveImage.lua */,
+			);
+			path = lua;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2240A6A51E85CBBE005BC713 /* NArt-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2240A6CE1E85CBBE005BC713 /* Build configuration list for PBXNativeTarget "NArt-ios" */;
+			buildPhases = (
+				2240A6A21E85CBBE005BC713 /* Sources */,
+				2240A6A31E85CBBE005BC713 /* Frameworks */,
+				2240A6A41E85CBBE005BC713 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "NArt-ios";
+			productName = "NArt-ios";
+			productReference = 2240A6A61E85CBBE005BC713 /* NArt-ios.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2240A6B91E85CBBE005BC713 /* NArt-iosTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2240A6D11E85CBBE005BC713 /* Build configuration list for PBXNativeTarget "NArt-iosTests" */;
+			buildPhases = (
+				2240A6B61E85CBBE005BC713 /* Sources */,
+				2240A6B71E85CBBE005BC713 /* Frameworks */,
+				2240A6B81E85CBBE005BC713 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2240A6BC1E85CBBE005BC713 /* PBXTargetDependency */,
+			);
+			name = "NArt-iosTests";
+			productName = "NArt-iosTests";
+			productReference = 2240A6BA1E85CBBE005BC713 /* NArt-iosTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2240A6C41E85CBBE005BC713 /* NArt-iosUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2240A6D41E85CBBE005BC713 /* Build configuration list for PBXNativeTarget "NArt-iosUITests" */;
+			buildPhases = (
+				2240A6C11E85CBBE005BC713 /* Sources */,
+				2240A6C21E85CBBE005BC713 /* Frameworks */,
+				2240A6C31E85CBBE005BC713 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2240A6C71E85CBBE005BC713 /* PBXTargetDependency */,
+			);
+			name = "NArt-iosUITests";
+			productName = "NArt-iosUITests";
+			productReference = 2240A6C51E85CBBE005BC713 /* NArt-iosUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2240A69E1E85CBBE005BC713 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = alex;
+				TargetAttributes = {
+					2240A6A51E85CBBE005BC713 = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = A4L54D88JK;
+					};
+					2240A6B91E85CBBE005BC713 = {
+						CreatedOnToolsVersion = 7.3;
+						TestTargetID = 2240A6A51E85CBBE005BC713;
+					};
+					2240A6C41E85CBBE005BC713 = {
+						CreatedOnToolsVersion = 7.3;
+						TestTargetID = 2240A6A51E85CBBE005BC713;
+					};
+				};
+			};
+			buildConfigurationList = 2240A6A11E85CBBE005BC713 /* Build configuration list for PBXProject "NArt-ios" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2240A69D1E85CBBE005BC713;
+			productRefGroup = 2240A6A71E85CBBE005BC713 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2240A6A51E85CBBE005BC713 /* NArt-ios */,
+				2240A6B91E85CBBE005BC713 /* NArt-iosTests */,
+				2240A6C41E85CBBE005BC713 /* NArt-iosUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2240A6A41E85CBBE005BC713 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2240A6B41E85CBBE005BC713 /* LaunchScreen.storyboard in Resources */,
+				22699A401E8FAE0E0049841C /* candy.t7 in Resources */,
+				22699A441E8FB0550049841C /* photo1.png in Resources */,
+				22FF25431E8FFF2E0073D400 /* TotalVariation.lua in Resources */,
+				22FF25411E8FFF060073D400 /* ShaveImage.lua in Resources */,
+				22FF25451E8FFF430073D400 /* InstanceNormalization.lua in Resources */,
+				22699A461E8FB33F0049841C /* lua in Resources */,
+				22699A421E8FAE160049841C /* predictor.lua in Resources */,
+				2240A6AF1E85CBBE005BC713 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2240A6B81E85CBBE005BC713 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2240A6C31E85CBBE005BC713 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2240A6A21E85CBBE005BC713 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2240A6AC1E85CBBE005BC713 /* ViewController.swift in Sources */,
+				2240A6AA1E85CBBE005BC713 /* AppDelegate.swift in Sources */,
+				2240A6E81E85CEA9005BC713 /* Torch.m in Sources */,
+				2240A6D91E85CC0B005BC713 /* NArt.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2240A6B61E85CBBE005BC713 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2240A6BF1E85CBBE005BC713 /* NArt_iosTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2240A6C11E85CBBE005BC713 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2240A6CA1E85CBBE005BC713 /* NArt_iosUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2240A6BC1E85CBBE005BC713 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2240A6A51E85CBBE005BC713 /* NArt-ios */;
+			targetProxy = 2240A6BB1E85CBBE005BC713 /* PBXContainerItemProxy */;
+		};
+		2240A6C71E85CBBE005BC713 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2240A6A51E85CBBE005BC713 /* NArt-ios */;
+			targetProxy = 2240A6C61E85CBBE005BC713 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2240A6AD1E85CBBE005BC713 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2240A6AE1E85CBBE005BC713 /* Base */,
+			);
+			name = Main.storyboard;
+			path = .;
+			sourceTree = "<group>";
+		};
+		2240A6B21E85CBBE005BC713 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2240A6B31E85CBBE005BC713 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			path = .;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2240A6CC1E85CBBE005BC713 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2240A6CD1E85CBBE005BC713 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2240A6CF1E85CBBE005BC713 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/NArt-ios",
+					"$(PROJECT_DIR)/NArt-ios/torch",
+				);
+				INFOPLIST_FILE = "NArt-ios/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "alex.n-art.NArt-ios";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "NArt-ios/NArt-ios-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		2240A6D01E85CBBE005BC713 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/NArt-ios",
+					"$(PROJECT_DIR)/NArt-ios/torch",
+				);
+				INFOPLIST_FILE = "NArt-ios/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "alex.n-art.NArt-ios";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "NArt-ios/NArt-ios-Bridging-Header.h";
+			};
+			name = Release;
+		};
+		2240A6D21E85CBBE005BC713 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "NArt-iosTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "alex.n-art.NArt-iosTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NArt-ios.app/NArt-ios";
+			};
+			name = Debug;
+		};
+		2240A6D31E85CBBE005BC713 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = "NArt-iosTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "alex.n-art.NArt-iosTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/NArt-ios.app/NArt-ios";
+			};
+			name = Release;
+		};
+		2240A6D51E85CBBE005BC713 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "NArt-iosUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "alex.n-art.NArt-iosUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "NArt-ios";
+			};
+			name = Debug;
+		};
+		2240A6D61E85CBBE005BC713 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "NArt-iosUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "alex.n-art.NArt-iosUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = "NArt-ios";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2240A6A11E85CBBE005BC713 /* Build configuration list for PBXProject "NArt-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2240A6CC1E85CBBE005BC713 /* Debug */,
+				2240A6CD1E85CBBE005BC713 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2240A6CE1E85CBBE005BC713 /* Build configuration list for PBXNativeTarget "NArt-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2240A6CF1E85CBBE005BC713 /* Debug */,
+				2240A6D01E85CBBE005BC713 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2240A6D11E85CBBE005BC713 /* Build configuration list for PBXNativeTarget "NArt-iosTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2240A6D21E85CBBE005BC713 /* Debug */,
+				2240A6D31E85CBBE005BC713 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2240A6D41E85CBBE005BC713 /* Build configuration list for PBXNativeTarget "NArt-iosUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2240A6D51E85CBBE005BC713 /* Debug */,
+				2240A6D61E85CBBE005BC713 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2240A69E1E85CBBE005BC713 /* Project object */;
+}
