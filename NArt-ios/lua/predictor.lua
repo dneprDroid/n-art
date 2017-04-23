@@ -35,7 +35,7 @@ local vgg_mean = { 103.939, 116.779, 123.68 }
 
             model = torch.load(path).model
             print(model)
-            -- model:evaluate()
+            model:evaluate()
             model:type('torch.FloatTensor')
             print('Lua: ended initing predictor')
 
@@ -51,8 +51,10 @@ local vgg_mean = { 103.939, 116.779, 123.68 }
 
         function styleImage(img_pre)
             print('Lua: started image forwarding.......')
-            print(  type(img_pre)  )
-            local img_out = model:forward(img_pre)
+            print( img_pre:type()  )
+            print( img_pre:size() )
+
+            local img_out = model:forward( img_pre )
             print('Lua: ended image forwarding')
             return img_out
         end

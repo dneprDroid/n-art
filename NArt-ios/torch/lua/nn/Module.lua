@@ -63,6 +63,10 @@ function Module:sharedAccUpdateGradParameters(input, gradOutput, lr)
    end
 end
 
+function Module:evaluate()
+    self.train = false
+end
+
 function Module:zeroGradParameters()
    local _,gradParams = self:parameters()
    if gradParams then

@@ -44,19 +44,14 @@
 
 @implementation NArt
 
-id nartSelf;
-
 -(instancetype) init {
     if ( self = [super init] ) {
-        nartSelf = self;
-
         self.t = [Torch new];
 
         [self.t initialize];
         [self.t runMain:    @"predictor" inFolder:   @""];
         
-        lua_State *L = [self.t getLuaState];
-        
+//        lua_State *L = [self.t getLuaState];
 //        lua_pushcfunction(L, (lua_CFunction) lua_getTensorImage);
 //        lua_setglobal(L, "getTensorImage");
 //
@@ -74,20 +69,20 @@ id nartSelf;
 }
 
 
-static void lua_getTensorImage(lua_State *L) {
-//    int n = lua_gettop(L);
-    Log("lua: getTensorImage....");
-    THFloatTensor *testTensor = [nartSelf imageToTensor: [UIImage imageNamed: @"photo1.png"]];
-    luaT_pushudata(L, testTensor, FloatTensor);
-}
-
-static void lua_saveImageTensor(lua_State *L) {
-    THFloatTensor *result = (THFloatTensor *) luaT_toudata(L, 1, FloatTensor);
-    assert(result != NULL);
-    Logw("received float tensor with size: %lu", (long) result->size);
-    UIImage *img = [nartSelf tensorToImage: result];
-    UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil);
-}
+//static void lua_getTensorImage(lua_State *L) {
+////    int n = lua_gettop(L);
+//    Log("lua: getTensorImage....");
+//    THFloatTensor *testTensor = [nartSelf imageToTensor: [UIImage imageNamed: @"photo1.png"]];
+//    luaT_pushudata(L, testTensor, FloatTensor);
+//}
+//
+//static void lua_saveImageTensor(lua_State *L) {
+//    THFloatTensor *result = (THFloatTensor *) luaT_toudata(L, 1, FloatTensor);
+//    assert(result != NULL);
+//    Logw("received float tensor with size: %lu", (long) result->size);
+//    UIImage *img = [nartSelf tensorToImage: result];
+//    UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil);
+//}
 
 
 -(void) styleImage: (UIImage *) image {
@@ -98,7 +93,7 @@ static void lua_saveImageTensor(lua_State *L) {
         
         THFloatTensor *testTensor = [self imageToTensor: image];
         Log("ending  converting ....");
-        assertf(0 == 0, "ffff");
+
         lua_State *L = [self.t getLuaState];
         
         lua_getglobal(L, "styleImage");
@@ -112,8 +107,8 @@ static void lua_saveImageTensor(lua_State *L) {
             return;
         }
         Log("begin tensor converting...");
-        
-        THFloatTensor *result = (THFloatTensor *) luaT_checkudata(L, -2, FloatTensor);
+
+        THFloatTensor *result = (THFloatTensor *) luaT_toudata(L, -1, FloatTensor);
         assert(result != NULL);
         Logw("received float tensor with size: %lu", (long) result->size);
         
@@ -130,7 +125,7 @@ static void lua_saveImageTensor(lua_State *L) {
     NSLog(@"imageToTensor...");
     uint8_t *imageData = [self imageToArray: image];
     
-    THFloatTensor *testTensor = THFloatTensor_newWithSize3d(3, IMG_W, IMG_H); //Initialize 1D tensor with size * 3 (R,G,B).
+    THFloatTensor *testTensor = THFloatTensor_newWithSize3d(3, IMG_W, IMG_H);
     
     NSLog(@"testTensorData created..., %i, %lu",
           testTensor->nDimension,
@@ -161,8 +156,6 @@ static void lua_saveImageTensor(lua_State *L) {
     NSLog(@"out tensor size: %lx", sizeof(imageTensor));
     
     uint8_t *imageBytes = new uint8_t[IMG_W * IMG_H  * 4];
-
-//    const int size = IMG_W * IMG_H;
     
     for (int i = 0; i < kImageSize; i += 4) {
         @autoreleasepool {
