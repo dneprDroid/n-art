@@ -44,20 +44,49 @@
 
 @implementation NArt
 
+id nartSelf;
+
 -(instancetype) init {
     if ( self = [super init] ) {
+        nartSelf = self;
 
         self.t = [Torch new];
 
         [self.t initialize];
         [self.t runMain:    @"predictor" inFolder:   @""];
+        
+        lua_State *L = [self.t getLuaState];
+        
+//        lua_pushcfunction(L, (lua_CFunction) lua_getTensorImage);
+//        lua_setglobal(L, "getTensorImage");
+//
+//        lua_pushcfunction(L, (lua_CFunction) lua_saveImageTensor);
+//        lua_setglobal(L, "saveImageTensor");
+        
         [self.t loadFileWithName:   @"candy.t7"
                 inResourceFolder:   @""
                 andLoadMethodName:  @"initPredictor"];
         NSLog(@"torch inited.....");
+        
         return self;
     }
     return nil;
+}
+
+
+static void lua_getTensorImage(lua_State *L) {
+//    int n = lua_gettop(L);
+    Log("lua: getTensorImage....");
+    THFloatTensor *testTensor = [nartSelf imageToTensor: [UIImage imageNamed: @"photo1.png"]];
+    luaT_pushudata(L, testTensor, FloatTensor);
+}
+
+static void lua_saveImageTensor(lua_State *L) {
+    THFloatTensor *result = (THFloatTensor *) luaT_toudata(L, 1, FloatTensor);
+    assert(result != NULL);
+    Logw("received float tensor with size: %lu", (long) result->size);
+    UIImage *img = [nartSelf tensorToImage: result];
+    UIImageWriteToSavedPhotosAlbum(img, nil, nil, nil);
 }
 
 
@@ -66,25 +95,25 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         Log("starting converting ....");
+        
         THFloatTensor *testTensor = [self imageToTensor: image];
         Log("ending  converting ....");
-
+        assertf(0 == 0, "ffff");
         lua_State *L = [self.t getLuaState];
         
-        //call function
         lua_getglobal(L, "styleImage");
-        Log("luaT pushudata ...");
-        
         luaT_pushudata(L, testTensor, FloatTensor);
         
-//        if (lua_pcall(L, 1, 1, 0) != 0) {
-//            Logw("lua error str: %s ", lua_tostring(L, -1));
-//            throwException("Error calling lua function 'styleImage' ");
-//            return;
-//        }
+        Log("luaT pushudata ... ");
+
+        if (lua_pcall(L, 1, 1, 0) != 0) {
+            Logw("lua error str: %s ", lua_tostring(L, -1));
+            throwException("Error calling lua function 'styleImage' ");
+            return;
+        }
         Log("begin tensor converting...");
         
-        THFloatTensor *result = (THFloatTensor *) luaT_toudata(L, -1, FloatTensor);
+        THFloatTensor *result = (THFloatTensor *) luaT_checkudata(L, -2, FloatTensor);
         assert(result != NULL);
         Logw("received float tensor with size: %lu", (long) result->size);
         
@@ -104,10 +133,9 @@
     THFloatTensor *testTensor = THFloatTensor_newWithSize3d(3, IMG_W, IMG_H); //Initialize 1D tensor with size * 3 (R,G,B).
     
     NSLog(@"testTensorData created..., %i, %lu",
-          kInputTensorSize,
+          testTensor->nDimension,
           (long) testTensor->size);
     
-//    const int size = IMG_W * IMG_H;
     for (int i = 0; i < kImageSize; i += 4) {
         @autoreleasepool {
             int j = i / 4;

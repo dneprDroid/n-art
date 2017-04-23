@@ -37,12 +37,21 @@ local vgg_mean = { 103.939, 116.779, 123.68 }
             print(model)
             -- model:evaluate()
             model:type('torch.FloatTensor')
-
             print('Lua: ended initing predictor')
+
+            -- print('Lua: img start forward....')
+            -- local inputImage = getTensorImage()
+            -- print('Lua: img forward....')
+
+            -- local img_out = model:forward(img_pre)
+            -- print('Lua: img forward ended....')
+            -- saveImageTensor(img_out)
+
         end
 
         function styleImage(img_pre)
             print('Lua: started image forwarding.......')
+            print(  type(img_pre)  )
             local img_out = model:forward(img_pre)
             print('Lua: ended image forwarding')
             return img_out

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		222B90FF1EACEBBB001B1CE6 /* Torch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 222B90FE1EACEBBB001B1CE6 /* Torch.framework */; };
 		2240A6AA1E85CBBE005BC713 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2240A6A91E85CBBE005BC713 /* AppDelegate.swift */; };
 		2240A6AC1E85CBBE005BC713 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2240A6AB1E85CBBE005BC713 /* ViewController.swift */; };
 		2240A6AF1E85CBBE005BC713 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2240A6AD1E85CBBE005BC713 /* Main.storyboard */; };
@@ -16,7 +17,6 @@
 		2240A6D91E85CC0B005BC713 /* NArt.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2240A6D81E85CC0B005BC713 /* NArt.mm */; };
 		2240A6E41E85CE6D005BC713 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2240A6E31E85CE6D005BC713 /* Accelerate.framework */; };
 		2240A6E81E85CEA9005BC713 /* Torch.m in Sources */ = {isa = PBXBuildFile; fileRef = 2240A6E71E85CEA9005BC713 /* Torch.m */; };
-		2242DB761EABEA910037389B /* Torch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2242DB751EABEA910037389B /* Torch.framework */; };
 		22699A401E8FAE0E0049841C /* candy.t7 in Resources */ = {isa = PBXBuildFile; fileRef = 22699A3E1E8FAE0E0049841C /* candy.t7 */; };
 		22699A421E8FAE160049841C /* predictor.lua in Resources */ = {isa = PBXBuildFile; fileRef = 22699A411E8FAE160049841C /* predictor.lua */; };
 		22699A441E8FB0550049841C /* photo1.png in Resources */ = {isa = PBXBuildFile; fileRef = 22699A431E8FB0550049841C /* photo1.png */; };
@@ -44,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		222B90FE1EACEBBB001B1CE6 /* Torch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Torch.framework; sourceTree = "<group>"; };
 		2240A6A61E85CBBE005BC713 /* NArt-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "NArt-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2240A6A91E85CBBE005BC713 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2240A6AB1E85CBBE005BC713 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -62,7 +63,6 @@
 		2240A6E31E85CE6D005BC713 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		2240A6E61E85CEA9005BC713 /* Torch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Torch.h; sourceTree = "<group>"; };
 		2240A6E71E85CEA9005BC713 /* Torch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Torch.m; sourceTree = "<group>"; };
-		2242DB751EABEA910037389B /* Torch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Torch.framework; sourceTree = "<group>"; };
 		22699A3E1E8FAE0E0049841C /* candy.t7 */ = {isa = PBXFileReference; lastKnownFileType = file; path = candy.t7; sourceTree = "<group>"; };
 		22699A411E8FAE160049841C /* predictor.lua */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = predictor.lua; sourceTree = "<group>"; };
 		22699A431E8FB0550049841C /* photo1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photo1.png; sourceTree = "<group>"; };
@@ -78,7 +78,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2240A6E41E85CE6D005BC713 /* Accelerate.framework in Frameworks */,
-				2242DB761EABEA910037389B /* Torch.framework in Frameworks */,
+				222B90FF1EACEBBB001B1CE6 /* Torch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -156,7 +156,7 @@
 		2240A6E51E85CE86005BC713 /* torch */ = {
 			isa = PBXGroup;
 			children = (
-				2242DB751EABEA910037389B /* Torch.framework */,
+				222B90FE1EACEBBB001B1CE6 /* Torch.framework */,
 				2240A6E61E85CEA9005BC713 /* Torch.h */,
 				2240A6E71E85CEA9005BC713 /* Torch.m */,
 				22699A451E8FB33F0049841C /* lua */,
