@@ -31,20 +31,20 @@ local vgg_mean = { 103.939, 116.779, 123.68 }
         local model -- torch pre-trained model
 
         function initPredictor(path)
-            print('started initing predictor')
+            print('Lua: started initing predictor')
 
             model = torch.load(path).model
             print(model)
-            model:evaluate()
+            -- model:evaluate()
             model:type('torch.FloatTensor')
 
-            print('ended initing predictor')
+            print('Lua: ended initing predictor')
         end
 
         function styleImage(img_pre)
-            print('started image forwarding.......')
+            print('Lua: started image forwarding.......')
             local img_out = model:forward(img_pre)
-            print('ended image forwarding')
+            print('Lua: ended image forwarding')
             return img_out
         end
 

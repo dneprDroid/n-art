@@ -47,7 +47,7 @@ function SpatialReflectionPadding:updateGradInput(input, gradOutput)
 end
 
 function SpatialReflectionPadding:__tostring__()
-  return torch.type(self) ..
-      string.format('(l=%d, r=%d, t=%d, b=%d)', self.pad_l, self.pad_r,
+  return -- torch.type(self) ..
+      string.format('nn.SpatialReflectionPadding (l=%d, r=%d, t=%d, b=%d)', self.pad_l, self.pad_r,
                     self.pad_t, self.pad_b)
 end

@@ -23,6 +23,9 @@
 #define MEAN_B      123.68f
 #define FloatTensor "torch.FloatTensor"
 
+#define clean_errno() (errno == 0 ? "None" : strerror(errno))
+#define log_error(M, ...) fprintf(stderr, "[ERROR] (%s:%d: errno: %s) " M "\n", __FILE__, __LINE__, clean_errno(), ##__VA_ARGS__)
+#define assertf(A, M, ...) if(!(A)) {log_error(M, ##__VA_ARGS__); assert(A); }
 
 #define kInputImageChannels 3
 #define kImageSize          (IMG_H * IMG_W * (kInputImageChannels + 1))
@@ -74,11 +77,11 @@
         
         luaT_pushudata(L, testTensor, FloatTensor);
         
-        if (lua_pcall(L, 1, 1, 0) != 0) {
-            Logw("lua error str: %s ", lua_tostring(L, -1));
-            throwException("Error calling lua function 'styleImage' ");
-            return;
-        }
+//        if (lua_pcall(L, 1, 1, 0) != 0) {
+//            Logw("lua error str: %s ", lua_tostring(L, -1));
+//            throwException("Error calling lua function 'styleImage' ");
+//            return;
+//        }
         Log("begin tensor converting...");
         
         THFloatTensor *result = (THFloatTensor *) luaT_toudata(L, -1, FloatTensor);
@@ -101,7 +104,7 @@
     THFloatTensor *testTensor = THFloatTensor_newWithSize3d(3, IMG_W, IMG_H); //Initialize 1D tensor with size * 3 (R,G,B).
     
     NSLog(@"testTensorData created..., %i, %lu",
-          (int) floorf(4 / 5),///kInputTensorSize,
+          kInputTensorSize,
           (long) testTensor->size);
     
 //    const int size = IMG_W * IMG_H;
@@ -194,7 +197,6 @@
     CGImageRelease(imageRef);
     CGDataProviderRelease(provider);
     
-    UIImageWriteToSavedPhotosAlbum(outputImage, nil, nil, nil);
     return outputImage;
 }
 
