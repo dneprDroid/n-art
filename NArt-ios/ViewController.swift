@@ -14,15 +14,15 @@ class ViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.allowsEditing = false
-        picker.sourceType = .PhotoLibrary
+        picker.sourceType = .photoLibrary
         
-        self.presentViewController(picker, animated: true) {
+        self.present(picker, animated: true) {
             
         }
 
@@ -32,13 +32,13 @@ class ViewController: UIViewController {
 
 extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            dismissViewControllerAnimated(true, completion: nil)
+            dismiss(animated: true, completion: nil)
 
             let art = NArt()
             print("image size: \( image.size )")
-            art.styleImage(image)
+            art?.styleImage(image)
         }
     }
 }
