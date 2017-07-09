@@ -73,43 +73,6 @@ THFloatTensor * arrayToTensor(jbyte *imageData) {
     return testTensor;
 }
 
-/*
-bool isMainThread(JNIEnv *env) {
-    jclass class1 = env->FindClass("art/neural/ovechko/neuralart/ArtUtil");
-
-
-    jmethodID mid = env->GetStaticMethodID(class1, "isMainThread", "()B");
-
-    jboolean isMainThread = env->CallStaticBooleanMethod(class1, mid);
-    return (bool)(isMainThread == JNI_TRUE);
-}
-
-
-//called from Lua
-static void onImageStyled(lua_State *L) {
-    JNIEnv *env;
-    jint rs = jvm->AttachCurrentThread(&env, NULL);
-    assert (rs == JNI_OK);
-
-    THFloatTensor *result = (THFloatTensor *) luaT_toudata(L, 1, "torch.FloatTensor");
-    assert(result != NULL);
-
-    //output tensor to java array
-    jfloatArray jimageTensor;
-    float *tensorArray = result->storage->data;
-    jimageTensor = env->NewFloatArray(arraySize(tensorArray));
-    env->SetFloatArrayRegion(jimageTensor, 0, 3, tensorArray);
-    free(tensorArray);
-
-    jclass clazz = env->FindClass("art/neural/ovechko/neuralart/NeuralArt");
-    jmethodID onCompleted = env->GetStaticMethodID(clazz, "onImageStyled",
-                                                   "()V");
-    env->CallStaticVoidMethod(clazz, onCompleted, jimageTensor);
-    env->DeleteLocalRef(clazz);
-    //env->DeleteLocalRef(onCompleted);
-}
-*/
-
 JNIEXPORT void  JNICALL
 Java_art_neural_ovechko_neuralart_TorchPredictor_nativeStyleImage(JNIEnv *env, jobject thiz,
                                                        jbyteArray bitmapRGBData) {
