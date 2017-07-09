@@ -18,6 +18,12 @@ extern "C" {
 #define MEAN_R 103.939f
 #define MEAN_G 116.779f
 #define MEAN_B 123.68f
+
+#define kInputImageChannels 3
+#define kImageSize          (IMG_H * IMG_W * (kInputImageChannels + 1))
+#define kInputTensorSize    (IMG_H * IMG_W * kInputImageChannels)
+
+
 #define FloatTensor "torch.FloatTensor"
 #define arraySize(_array) (sizeof(_array) / sizeof(_array[0]))
 #define Logw(string, x...)        __android_log_print(ANDROID_LOG_INFO, "NeuralArt", string, x)
@@ -44,6 +50,29 @@ void luaFree() {
         Logw("Lua GC size: %d", GC_LUA_SIZE);
       }
 }
+
+
+
+
+THFloatTensor * arrayToTensor(jbyte *imageData) {
+    THFloatTensor *testTensor = THFloatTensor_newWithSize3d(3, IMG_W, IMG_H);
+//    NSLog(@"testTensorData created..., %i, %lu",
+//          testTensor->nDimension,
+//          (long) testTensor->size);
+
+    for (int i = 0; i < kImageSize; i += 4) {
+            int j = i / 4;
+            int yH = floorf(j / IMG_W);
+            int xW = j - yH * IMG_W;
+            THTensor_fastSet3d(testTensor,   0, xW, yH,    (imageData[i + 0] & 0xFF) - MEAN_R);
+            THTensor_fastSet3d(testTensor,   1, xW, yH,    (imageData[i + 1] & 0xFF) - MEAN_G);
+            THTensor_fastSet3d(testTensor,   2, xW, yH,    (imageData[i + 2] & 0xFF) - MEAN_B);
+    }
+//    NSLog(@"input tensor size %lu", (long) testTensor->size);
+//    free(imageData);
+    return testTensor;
+}
+
 /*
 bool isMainThread(JNIEnv *env) {
     jclass class1 = env->FindClass("art/neural/ovechko/neuralart/ArtUtil");
@@ -84,53 +113,40 @@ static void onImageStyled(lua_State *L) {
 JNIEXPORT void  JNICALL
 Java_art_neural_ovechko_neuralart_TorchPredictor_nativeStyleImage(JNIEnv *env, jobject thiz,
                                                        jbyteArray bitmapRGBData) {
-
     Log("nativeStyleImage....");
     luaFree();
 
     jbyte *inputData; // Initialize tensor to store java byte data from bitmap.
-    inputData = (env)->GetByteArrayElements(bitmapRGBData,
-                                            0); // Get pointer to java byte array region
-    int result = -1;
-    int size = IMG_W * IMG_H;
-    THFloatTensor *testTensor = THFloatTensor_newWithSize1d(3 * size); //Initialize 1D tensor with size * 3 (R,G,B).
-    //jfloat *testTensorData = THFloatTensor_data(testTensor);
-    Log("testTensorData created...");
+    inputData = (env)->GetByteArrayElements(bitmapRGBData, 0); // Get pointer to java byte array region
+    Log("starting converting ....");
 
-    for (int i = 0; i < size; i++) {
-        THTensor_fastSet1d(testTensor,  size * 0 + i,    (inputData[i * 4 + 0] & 0xFF) - MEAN_R); // Red
-        THTensor_fastSet1d(testTensor,  size * 1 + i,    (inputData[i * 4 + 1] & 0xFF) - MEAN_G); // Green
-        THTensor_fastSet1d(testTensor,  size * 2 + i,    (inputData[i * 4 + 2] & 0xFF) - MEAN_B); // Blue
-    }
-    Log("image to tensor converted...");
+    THFloatTensor *testTensor = arrayToTensor(inputData);
     free(inputData);
-    Log("cleaned jbyte array ");
+    Log("ending  converting ....");
 
-    //Logw("checking thred type: %b", isMainThread(env));
+//    lua_State *L = [self.t getLuaState];
+
     lua_getglobal(L, "styleImage");
-    Log("luaT pushudata ...");
-
     luaT_pushudata(L, testTensor, FloatTensor);
 
-    Log("luaT push data ended ...");
+    Log("luaT pushudata ... ");
 
     if (lua_pcall(L, 1, 1, 0) != 0) {
-        throwException(env, "Error calling lua function styleImage");
-        Log(lua_tostring(L, -1));
-    } else {
-        Log("begin tensor converting...");
-
-        THFloatTensor *result = (THFloatTensor *) luaT_toudata(L, 1, FloatTensor);
-        assert(result != NULL);
-        Log("received float tensor...");
-        lua_pop(L, 1);
-        jfloat *outTensorData = THFloatTensor_data(result);
-        assert(outTensorData != NULL);
-        Log("casting float tensor to jfloat is succeeded...");
+        Logw("lua error str: %s ", lua_tostring(L, -1));
+        throwException(env,"Error calling lua function 'styleImage' ");
+        return;
     }
+    Log("begin tensor converting...");
+
+    THFloatTensor *result = (THFloatTensor *) luaT_toudata(L, -1, FloatTensor);
+    assert(result != NULL);
+    Logw("received float tensor with size: %lu", (long) result->size);
+
+    lua_pop(L, 1);
     env->ReleaseByteArrayElements(bitmapRGBData, inputData,
                                   0); // Destroy pointer to location in C. Only need java now
 }
+
 
 JNIEXPORT void  JNICALL
 Java_art_neural_ovechko_neuralart_TorchPredictor_nativeInitTorchPredictor(JNIEnv *env, jobject thiz,
